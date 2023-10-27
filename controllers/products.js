@@ -5,7 +5,6 @@ const newProduct = async (req, res) => {
     try {
         await product.save()
         res.json({
-            ok: true,
             product
         })
     } catch (error) {
@@ -18,7 +17,6 @@ const getProducts = async (req, res) => {
 
     try {
         res.json({
-            ok: true,
             products
         })
     } catch (error) {

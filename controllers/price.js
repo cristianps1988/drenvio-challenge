@@ -2,15 +2,29 @@ const Products = require('../models/products')
 const User = require('../models/users')
 
 const getPrice = async (req, res) => {
-    const { user_id, product_name } = req.params
-    const user = await User.findById(user_id)
-    const product = await Products.find({ brand: { $regex: new RegExp(`^${product_name}$`, "i") }, stock: { $ne: 0 } })
-    console.log(user.special_price.map(item => {
-        return item.toLowerCase() === product_name.toLowerCase() ? true : false
-    }))
 
     try {
-        if (user.special_price.length === 0 || !user.special_price.includes(product_name)) {
+        const { user_id, product_brand } = req.params
+        const user = await User.findById(user_id)
+        const product = await Products.find({ brand: { $regex: new RegExp(`^${product_brand}$`, "i") }, stock: { $ne: 0 } })
+        const hasSpecial_price = user.special_price.some(item => {
+            if (item.toLowerCase() !== product_brand.toLowerCase()) {
+                return false
+            }
+            return true
+        })
+        const special_price = user.special_price.map(item => {
+            if (item.toLowerCase() === product_brand.toLowerCase()) {
+                return item.toLowerCase()
+            }
+            return null
+        })
+
+        if (product.length == 0) return res.status(400).json({
+            msg: 'We could not find products of this brand'
+        })
+
+        if (!hasSpecial_price) {
             res.json({
                 product: product.map(prod => {
                     return {
@@ -20,7 +34,8 @@ const getPrice = async (req, res) => {
                 })
             })
         }
-        if (user.special_price.includes(product_name)) {
+
+        if (special_price.find(element => element === product_brand)) {
             res.json({
                 product: product.map(prod => {
                     return {
@@ -31,20 +46,11 @@ const getPrice = async (req, res) => {
             })
         }
     } catch (error) {
+        res.status(400).json({
+            msg: 'Something went wrong'
+        })
         console.log(error)
     }
-
-    // const products = await Products.find({ stock: { $ne: 0 } })
-    // const user = await User.find()
-
-    // try {
-    //     res.json({
-    //         ok: true,
-    //         products
-    //     })
-    // } catch (error) {
-    //     console.log(error)
-    // }
 }
 
 module.exports = {
