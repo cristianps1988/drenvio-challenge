@@ -43,4 +43,8 @@ npm run test
 - product_brand = asics
 
 ## Deploy
-- https://
+- https://drenvio-challenge.vercel.app
+
+## Deploy endpoinst examples
+- https://drenvio-challenge.vercel.app/products
+- https://drenvio-challenge.vercel.app/price/653ad5fa280a1c26daf39b76/asics
