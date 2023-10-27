@@ -1,6 +1,6 @@
 const Products = require('../models/products')
 
-const getProducts = async (req, res) => {
+const newProduct = async (req, res) => {
     const product = new Products(req.body)
     try {
         await product.save()
@@ -13,12 +13,13 @@ const getProducts = async (req, res) => {
     }
 }
 
-const getprueba = async (req, res) => {
-    const prueba = await Products.find()
+const getProducts = async (req, res) => {
+    const products = await Products.find({ stock: { $ne: 0 } })
+
     try {
         res.json({
             ok: true,
-            prueba
+            products
         })
     } catch (error) {
         console.log(error)
@@ -26,6 +27,6 @@ const getprueba = async (req, res) => {
 }
 
 module.exports = {
-    getProducts,
-    getprueba
+    newProduct,
+    getProducts
 }

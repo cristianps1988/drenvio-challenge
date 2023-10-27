@@ -3,11 +3,11 @@
 
 const { Router } = require('express')
 const router = Router()
-const { getProducts, getprueba } = require('../controllers/products')
+const { getProducts, newProduct } = require('../controllers/products')
 
 
 
-router.post('/', getProducts)
-router.get('/', getprueba)
+router.post('/', newProduct)
+router.get('/', getProducts)
 
 module.exports = router;

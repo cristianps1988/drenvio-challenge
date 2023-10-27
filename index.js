@@ -12,6 +12,7 @@ app.use(express.json())
 
 
 app.use('/products', require('./routes/products'))
+app.use('/user', require('./routes/user'))
 app.use('/price', require('./routes/price'))
 
 app.listen(process.env.PORT, () => {

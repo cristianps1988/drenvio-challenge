@@ -3,13 +3,8 @@
 
 const { Router } = require('express')
 const router = Router()
+const { getPrice } = require('../controllers/price')
 
-
-
-router.get('/', (req, res) => {
-    res.json({
-        precio: 'producto'
-    })
-})
+router.get('/:user_id/:product_name', getPrice)
 
 module.exports = router;
