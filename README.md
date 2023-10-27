@@ -36,7 +36,7 @@ npm run test
 
 
 - /products : Returns all products that are currently in stock.
-- /prices/:user_id/:product_brand : return the special price for the given client and brand, if available. If the client doesn't have a special price for the brand, return the base price.
+- /price/:user_id/:product_brand : return the special price for the given client and brand, if available. If the client doesn't have a special price for the brand, return the base price.
 
 ### Test Data
 - user_id = 653ad5fa280a1c26daf39b76
