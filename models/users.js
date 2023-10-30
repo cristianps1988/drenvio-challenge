@@ -7,7 +7,8 @@ const UsersSchema = Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     special_price: {
         type: Array,

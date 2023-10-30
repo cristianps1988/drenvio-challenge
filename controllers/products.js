@@ -8,6 +8,9 @@ const newProduct = async (req, res) => {
             product
         })
     } catch (error) {
+        res.status(400).json({
+            msg: 'Something went wrong'
+        })
         console.log(error)
     }
 }
@@ -20,6 +23,9 @@ const getProducts = async (req, res) => {
             products
         })
     } catch (error) {
+        res.status(400).json({
+            msg: 'Something went wrong'
+        })
         console.log(error)
     }
 }

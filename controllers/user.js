@@ -9,6 +9,9 @@ const newUser = async (req, res) => {
             user
         })
     } catch (error) {
+        res.status(400).json({
+            msg: 'Something went wrong'
+        })
         console.log(error)
     }
 }

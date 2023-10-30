@@ -7,7 +7,7 @@ const getPrice = async (req, res) => {
         const { user_id, product_brand } = req.params
         const user = await User.findById(user_id)
         const product = await Products.find({ brand: { $regex: new RegExp(`^${product_brand}$`, "i") }, stock: { $ne: 0 } })
-        const hasSpecial_price = user.special_price.some(item => {
+        const hasSpecialPrice = user.special_price.some(item => {
             if (item.toLowerCase() !== product_brand.toLowerCase()) {
                 return false
             }
@@ -24,7 +24,7 @@ const getPrice = async (req, res) => {
             msg: 'We could not find products of this brand'
         })
 
-        if (!hasSpecial_price) {
+        if (!hasSpecialPrice) {
             res.json({
                 product: product.map(prod => {
                     return {
